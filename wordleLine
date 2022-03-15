@@ -1,0 +1,46 @@
+import wordleTile
+class WordleLine:
+    LETTERS = 5
+    TILELENGTH = 50
+
+    def __init__(self, xpos, ypos, the_word, text = ""):
+        # what would you do here? 
+        self._x = xpos
+        self._word = the_word
+        self._tiles = [] # list of WordleTile, also setup each tile position
+        for i in range(self.LETTERS):
+            self._tiles.append(wordleTile(xpos, ypos + i * self._TILELENGTH))
+
+    @property
+    def text(self):
+        return self._text
+
+    @text.setter
+    def text(self, new_text):
+        if len(new_text) != __class__.LETTERS:
+            # don't implement this... 
+            pass
+        self._text = new_text
+        # you need to do something here!
+        # change the color of each tile based on the match with the word
+        letters = {"a" : 0, "b" : 0, "c" : 0, "d" : 0, "e" : 0, "f" : 0, "g" : 0, "h" : 0, "i" : 0, "j" : 0, "k" : 0, "l" : 0, "m" : 0, "n" : 0, "o" : 0, "p" : 0, "q" : 0, "r" : 0,
+                   "s" : 0, "t" : 0, "u" : 0, "v" : 0, "w" : 0, "x" : 0, "y" : 0, "z" : 0}
+        for w in self._word:
+            letters[w] += 1
+        
+        for i in range(len(self._tiles)):
+            # makes all the colors green
+            if (self._tiles[i].text() == self._word[i]):
+                self._tiles[i].color("GREEN")
+                letters[self._word[i]] -= 1
+        for i in range(len(self._tiles)):
+            if (self._tiles[i].color() == "GREY"):
+                if (letters[self._tiles[i]] > 0):
+                    letters[self._tiles[i]] -= 1
+                    self._tiles[i].color("YELLOW")
+                else:
+                    self._tiles[i].color("BLACK")
+    def rasterize(self):
+        # do something with each WordleTile 
+        for t in self._tiles:
+            t.rasterize()
