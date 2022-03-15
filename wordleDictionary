@@ -1,12 +1,14 @@
 import random
 class WordleDictionary:
     def __init__(self, dictionary_file, common_word_file):
-        self._commonWords = []
-        self._words = []
         with open(dictionary_file) as f:
-            words = list(f.read().split())
+            line = f.readlines
+            self._words = line[0].replace("\n", '').split()
+            words = [w.lower for w in words]
+            
         with open(common_word_file) as f:
-            commonWords = f.readline()
+            line = f.readlines()
+            self._commonWords = [w.lower()[:-1] for w in line]
     
     def valid_word(self, word):
         # checks if a word is valid
