@@ -1,0 +1,19 @@
+nMachines, goal = map(int, input().split())
+machines = list(map(int, input().split()))
+
+low = 0
+high = 2*10**5
+ans = 0
+while low <= high:
+	mid = (low + high) // 2
+
+	n_produced = 0
+	for machine in machines:
+		n_produced += mid // machine
+
+	if n_produced >= goal:
+		ans = mid
+		high = mid - 1
+	else:
+		low = mid + 1
+print(ans)
