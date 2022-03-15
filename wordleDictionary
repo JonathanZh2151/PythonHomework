@@ -1,0 +1,21 @@
+import random
+class WordleDictionary:
+    def __init__(self, dictionary_file, common_word_file):
+        self._commonWords = []
+        self._words = []
+        with open(dictionary_file) as f:
+            words = list(f.read().split())
+        with open(common_word_file) as f:
+            commonWords = f.readline()
+    
+    def valid_word(self, word):
+        # checks if a word is valid
+        return word in self._words
+    
+    def get_random_word(self):
+        # keeps track of used words
+        r = random.randint(0, len(self._commonWords) - 1)
+        w = self._commonWords[r]
+        self._commonWords.pop(r)
+        return w
+        
