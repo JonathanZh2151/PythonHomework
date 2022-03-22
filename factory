@@ -1,0 +1,30 @@
+
+
+# nMachines, goal = map(int, input().split())
+# machines = list(map(int, input().split()))
+
+with open("inpt") as file:
+    l = file.readlines()
+    l1 = l[0].split(" ")
+    nMachines = int(l1[0])
+    goal = int(l1[1])
+    machines = [int(i) for i in l[1].split(" ")]
+print(nMachines)
+print(goal)
+
+low = 0 # minimum time
+high = min(machines) * goal # maximum amount of time
+time = 0
+while low <= high:
+    mid = (low + high) // 2
+
+    n_produced = 0
+    for machine in machines:
+        n_produced += mid // machine
+
+    if n_produced >= goal:
+        time = mid
+        high = mid - 1
+    else:
+        low = mid + 1
+print(time)
